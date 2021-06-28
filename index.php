@@ -7,7 +7,7 @@
     <title>Contact form</title>
     
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
@@ -23,7 +23,41 @@
   <body>
     
     <!-- Starting the form -->
-
+      <section class="form-contact-wrapper">
+        <div class="container">
+          <div class="row">
+            <h2 class="col-12 text-center mt-5 mb-5">Contact Me</h2>
+            <form class="col-12 form-horizontal mb-5" id="form-contact">
+              <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <i class="fas fa-user"></i>
+                <input type="text" class="form-control" id="username" placeholder="Type your user name">
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <i class="fas fa-envelope"></i>
+                <input type="email" class="form-control" id="email" placeholder="Type your email">
+              </div>
+              <div class="mb-3">
+                <label for="cellphone" class="form-label">Cell phone</label>
+                <i class="fas fa-phone-alt"></i>
+                <input type="text" class="form-control" id="cellphone" placeholder="Type your cell phone">
+              </div>
+              <div class="mb-3 message-wrapper">
+                <label for="message" class="form-label">Message</label>
+                <i class="fas fa-envelope-open-text"></i>
+                <textarea class="form-control" id="message" rows="5" placeholder="Type your message"></textarea>
+              </div>
+              <div class="text-center">
+                <button type="submit" class="btn btn-success">
+                  <i class="fas fa-paper-plane"></i>  
+                  Send Message
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
     <!-- Ending the form -->
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

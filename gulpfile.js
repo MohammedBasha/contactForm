@@ -35,7 +35,7 @@ gulp.task('styles', function () {
       .pipe(gulp.dest(config.dest))
       
       // output the minified version
-      .pipe(minCss())
+      .pipe(minCss({processImport: false}))
       .pipe(rename({ extname: '.min.css' }))
       .pipe(gulp.dest(config.dest));
 
