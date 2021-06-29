@@ -4,10 +4,10 @@
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Assigning the values to the main variables
-    $username = $_POST['username'];
-    $email = $_POST['email'];
-    $cellphone = $_POST['cellphone'];
-    $message = $_POST['message'];
+    $username = filter_var($_POST['username'], FILTER_SANITIZE_STRING);
+    $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+    $cellphone = filter_var($_POST['cellphone'], FILTER_SANITIZE_NUMBER_INT);
+    $message = filter_var($_POST['message'], FILTER_SANITIZE_STRING);
 
     // Creating an array of errors
     $formError = [];
