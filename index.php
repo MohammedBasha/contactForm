@@ -14,17 +14,17 @@
 
     // Checking if the username is more than 2 characters long
     if (strlen($username) <= 2) {
-      $formError[] = 'Username must be more than 2 characters long';
+      $formError[] = 'Username must be more than <strong>2</strong> characters long';
     }
 
     // Checking if the cellphone is 11 characters long
     if (strlen($cellphone) != 11) {
-      $formError[] = 'Cell Phone must be 11 characters long';
+      $formError[] = 'Cell Phone must be <strong>11</strong> characters long';
     }
 
     // Checking if the message is more than 10 characters long
     if (strlen($message) < 10) {
-      $formError[] = 'Message must be more than 10 characters long';
+      $formError[] = 'Message must be more than <strong>10</strong> characters long';
     }
   }
 ?>
@@ -59,44 +59,54 @@
           <div class="row">
             <h2 class="col-12 text-center mt-5 mb-5">Contact Me</h2>
 
-            <div class="col-12 text-center form-errors">
+            <form class="col-12 form-horizontal mb-5"
+                  id="form-contact"
+                  method="post"
+                  action="<?php $_SERVER['PHP_SELF'] ?>">
+              
+                  <div class="text-center form-errors">
               <?php
                 // Checking if the $formError variable is found
                 if(isset($formError)) {
 
                   // Looping through and printing the errors
                   foreach($formError as $error) {
-                    echo '<div class="mb-3">' . $error . '</div>';
+                    ?>
+                    <div class="alert alert-warning alert-dismissible fade show mb-3" role="alert">
+                    <?php
+                    echo $error;
+                    ?>
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <?php
                   }
                 }
               ?>
             </div>
 
-            <form class="col-12 form-horizontal mb-5"
-                  id="form-contact"
-                  method="post"
-                  action="<?php $_SERVER['PHP_SELF'] ?>">
-              <div class="mb-3">
+              <div class="mb-3 field-wrapper">
                 <label for="username" class="form-label">Username</label>
                 <i class="fas fa-user"></i>
                 <input type="text" class="form-control" id="username" name="username" placeholder="Type your user name">
               </div>
-              <div class="mb-3">
+              <div class="mb-3 field-wrapper">
                 <label for="email" class="form-label">Email</label>
                 <i class="fas fa-envelope"></i>
                 <input type="email" class="form-control" id="email" name="email" placeholder="Type your email">
               </div>
-              <div class="mb-3">
+              <div class="mb-3 field-wrapper">
                 <label for="cellphone" class="form-label">Cell phone</label>
                 <i class="fas fa-phone-alt"></i>
                 <input type="text" class="form-control" id="cellphone" name="cellphone" placeholder="Type your cell phone">
               </div>
-              <div class="mb-3 message-wrapper">
+              <div class="mb-3 field-wrapper message-wrapper">
                 <label for="message" class="form-label">Message</label>
                 <i class="fas fa-envelope-open-text"></i>
                 <textarea class="form-control" id="message" rows="5" name="message" placeholder="Type your message"></textarea>
               </div>
-              <div class="text-center">
+              <div class="text-center field-wrapper">
                 <button type="submit" class="btn btn-success">
                   <i class="fas fa-paper-plane"></i>  
                   Send Message
