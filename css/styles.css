@@ -44,6 +44,6 @@
   position: relative;
   padding-left: 35px;
 }
-.form-contact-wrapper form .alert {
+.form-contact-wrapper form .alert-warning {
   display: none;
 }

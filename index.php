@@ -8,7 +8,23 @@
     $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
     $cellphone = filter_var($_POST['cellphone'], FILTER_SANITIZE_NUMBER_INT);
     $message = filter_var($_POST['message'], FILTER_SANITIZE_STRING);
+
+    // Setting the headers
+    $headers = 'From: ' . $email . '\r\n';
+
+    // The mail function
+    mail('me@mohammedbasha.com', 'Contact Form', $message, $headers);
+
+    $success = '
+      <div class="alert alert-success alert-dismissible fade show mb-3" role="alert">
+        Your message sent successfully.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    ';
   }
+
 ?>
 
 <!doctype html>
@@ -36,80 +52,80 @@
   <body>
     
     <!-- Starting the form -->
-      <section class="form-contact-wrapper">
-        <div class="container">
-          <div class="row">
-            <h2 class="col-12 text-center mt-5 mb-5">Contact Me</h2>
+    <section class="form-contact-wrapper">
+      <div class="container">
+        <div class="row">
+          <h2 class="col-12 text-center mt-5 mb-5">Contact Me</h2>
 
-            <form class="col-12 form-horizontal mb-5"
-                  id="form-contact"
-                  method="post"
-                  action="<?php $_SERVER['PHP_SELF'] ?>">
+          <form class="col-12 form-horizontal mb-5"
+                id="form-contact"
+                method="post"
+                action="<?php $_SERVER['PHP_SELF'] ?>">
 
-              <div class="form-group field-wrapper">
-                <label for="username" class="form-label">Username</label>
-                <i class="fas fa-user"></i>
-                <input type="text" class="form-control" id="username" name="username" placeholder="Type your user name"
-                value="<?php echo isset($username)? $username : ''; ?>">
-                <i class="fas fa-asterisk"></i>
-              </div>
-              <div class="error-username alert alert-warning alert-dismissible fade show mb-3" role="alert">
-                Username must be more than <strong>2</strong> characters long
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
+                <?php echo (isset($success))? $success : '' ?>
 
-              <div class="form-group field-wrapper">
-                <label for="email" class="form-label">Email</label>
-                <i class="fas fa-envelope"></i>
-                <input type="email" class="form-control" id="email" name="email" placeholder="Type your email" value="<?php echo isset($email)? $email : ''; ?>">
-                <i class="fas fa-asterisk"></i>
-              </div>
-              <div class="error-email alert alert-warning alert-dismissible fade show mb-3" role="alert">
-                <?php
-                echo 'Email field can\'t be empty';
-                ?>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="form-group field-wrapper">
-                <label for="cellphone" class="form-label">Cell phone</label>
-                <i class="fas fa-phone-alt"></i>
-                <input type="text" class="form-control" id="cellphone" name="cellphone" placeholder="Type your cell phone"
-                value="<?php echo isset($cellphone)? $cellphone : ''; ?>">
-              </div>
-              <div class="error-cellphone alert alert-warning alert-dismissible fade show mb-3" role="alert">
-                Cell Phone must be more than <strong>11</strong> characters long
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
+            <div class="form-group field-wrapper">
+              <label for="username" class="form-label">Username</label>
+              <i class="fas fa-user"></i>
+              <input type="text" class="form-control" id="username" name="username" placeholder="Type your user name">
+              <i class="fas fa-asterisk"></i>
+            </div>
+            <div class="error-username alert alert-warning alert-dismissible fade show mb-3" role="alert">
+              Username must be more than <strong>2</strong> characters long
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
 
-              <div class="form-group field-wrapper message-wrapper">
-                <label for="message" class="form-label">Message</label>
-                <i class="fas fa-envelope-open-text"></i>
-                <textarea class="form-control" id="message" rows="5" name="message" placeholder="Type your message"><?php echo isset($message)? $message : ''; ?></textarea>
-                <i class="fas fa-asterisk"></i>
-              </div>
-              <div class="error-message alert alert-warning alert-dismissible fade show mb-3" role="alert">
-                Message must be more than <strong>10</strong> characters long
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
+            <div class="form-group field-wrapper">
+              <label for="email" class="form-label">Email</label>
+              <i class="fas fa-envelope"></i>
+              <input type="email" class="form-control" id="email" name="email" placeholder="Type your email">
+              <i class="fas fa-asterisk"></i>
+            </div>
+            <div class="error-email alert alert-warning alert-dismissible fade show mb-3" role="alert">
+              <?php
+              echo 'Email field can\'t be empty';
+              ?>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="form-group field-wrapper">
+              <label for="cellphone" class="form-label">Cell phone</label>
+              <i class="fas fa-phone-alt"></i>
+              <input type="text" class="form-control" id="cellphone" name="cellphone" placeholder="Type your cell phone">
+            </div>
+            <div class="error-cellphone alert alert-warning alert-dismissible fade show mb-3" role="alert">
+              Cell Phone must be more than <strong>11</strong> characters long
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
 
-              <div class="text-center field-wrapper">
-                <button type="submit" class="btn btn-success">
-                  <i class="fas fa-paper-plane"></i>  
-                  Send Message
-                </button>
-              </div>
-            </form>
-          </div>
+            <div class="form-group field-wrapper message-wrapper">
+              <label for="message" class="form-label">Message</label>
+              <i class="fas fa-envelope-open-text"></i>
+              <textarea class="form-control" id="message" rows="5" name="message" placeholder="Type your message"></textarea>
+              <i class="fas fa-asterisk"></i>
+            </div>
+            <div class="error-message alert alert-warning alert-dismissible fade show mb-3" role="alert">
+              Message must be more than <strong>10</strong> characters long
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+
+            <div class="text-center field-wrapper">
+              <button type="submit" class="btn btn-success">
+                <i class="fas fa-paper-plane"></i>  
+                Send Message
+              </button>
+            </div>
+          </form>
         </div>
-      </section>
+      </div>
+    </section>
     <!-- Ending the form -->
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
