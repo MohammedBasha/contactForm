@@ -1,3 +1,34 @@
+<?php
+
+  // Checking if the user coming from a post request
+  if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+    // Assigning the values to the main variables
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $cellphone = $_POST['cellphone'];
+    $message = $_POST['message'];
+
+    // Creating an array of errors
+    $formError = [];
+
+    // Checking if the username is more than 2 characters long
+    if (strlen($username) <= 2) {
+      $formError[] = 'Username must be more than 2 characters long';
+    }
+
+    // Checking if the cellphone is 11 characters long
+    if (strlen($cellphone) != 11) {
+      $formError[] = 'Cell Phone must be 11 characters long';
+    }
+
+    // Checking if the message is more than 10 characters long
+    if (strlen($message) < 10) {
+      $formError[] = 'Message must be more than 10 characters long';
+    }
+  }
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -27,26 +58,43 @@
         <div class="container">
           <div class="row">
             <h2 class="col-12 text-center mt-5 mb-5">Contact Me</h2>
-            <form class="col-12 form-horizontal mb-5" id="form-contact">
+
+            <div class="col-12 text-center form-errors">
+              <?php
+                // Checking if the $formError variable is found
+                if(isset($formError)) {
+
+                  // Looping through and printing the errors
+                  foreach($formError as $error) {
+                    echo '<div class="mb-3">' . $error . '</div>';
+                  }
+                }
+              ?>
+            </div>
+
+            <form class="col-12 form-horizontal mb-5"
+                  id="form-contact"
+                  method="post"
+                  action="<?php $_SERVER['PHP_SELF'] ?>">
               <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
                 <i class="fas fa-user"></i>
-                <input type="text" class="form-control" id="username" placeholder="Type your user name">
+                <input type="text" class="form-control" id="username" name="username" placeholder="Type your user name">
               </div>
               <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
                 <i class="fas fa-envelope"></i>
-                <input type="email" class="form-control" id="email" placeholder="Type your email">
+                <input type="email" class="form-control" id="email" name="email" placeholder="Type your email">
               </div>
               <div class="mb-3">
                 <label for="cellphone" class="form-label">Cell phone</label>
                 <i class="fas fa-phone-alt"></i>
-                <input type="text" class="form-control" id="cellphone" placeholder="Type your cell phone">
+                <input type="text" class="form-control" id="cellphone" name="cellphone" placeholder="Type your cell phone">
               </div>
               <div class="mb-3 message-wrapper">
                 <label for="message" class="form-label">Message</label>
                 <i class="fas fa-envelope-open-text"></i>
-                <textarea class="form-control" id="message" rows="5" placeholder="Type your message"></textarea>
+                <textarea class="form-control" id="message" rows="5" name="message" placeholder="Type your message"></textarea>
               </div>
               <div class="text-center">
                 <button type="submit" class="btn btn-success">
