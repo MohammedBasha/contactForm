@@ -20,6 +20,13 @@
   bottom: 10px;
   left: 10px;
 }
+.form-contact-wrapper form > div i.fa-asterisk {
+  right: 8px;
+  left: auto;
+  bottom: 14px;
+  font-size: 7px;
+  color: #ec0b0b;
+}
 .form-contact-wrapper form .form-label {
   font-weight: bold;
 }
