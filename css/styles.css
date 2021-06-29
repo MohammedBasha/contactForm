@@ -44,3 +44,6 @@
   position: relative;
   padding-left: 35px;
 }
+.form-contact-wrapper form .alert {
+  display: none;
+}

@@ -8,24 +8,6 @@
     $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
     $cellphone = filter_var($_POST['cellphone'], FILTER_SANITIZE_NUMBER_INT);
     $message = filter_var($_POST['message'], FILTER_SANITIZE_STRING);
-
-    // Creating an array of errors
-    $formError = [];
-
-    // Checking if the username is more than 2 characters long
-    if (strlen($username) <= 2) {
-      $formError[] = 'Username must be more than <strong>2</strong> characters long';
-    }
-
-    // Checking if the cellphone is 11 characters long
-    if (strlen($cellphone) <= 11) {
-      $formError[] = 'Cell Phone must be more than <strong>11</strong> characters long';
-    }
-
-    // Checking if the message is more than 10 characters long
-    if (strlen($message) < 10) {
-      $formError[] = 'Message must be more than <strong>10</strong> characters long';
-    }
   }
 ?>
 
@@ -63,28 +45,6 @@
                   id="form-contact"
                   method="post"
                   action="<?php $_SERVER['PHP_SELF'] ?>">
-              
-                  <div class="text-center form-errors">
-              <?php
-                // Checking if the $formError variable is found
-                if(!empty($formError)) {
-
-                  // Looping through and printing the errors
-                  foreach($formError as $error) {
-                    ?>
-                    <div class="alert alert-warning alert-dismissible fade show mb-3" role="alert">
-                    <?php
-                    echo $error;
-                    ?>
-                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <?php
-                  }
-                }
-              ?>
-            </div>
 
               <div class="form-group field-wrapper">
                 <label for="username" class="form-label">Username</label>
@@ -93,11 +53,26 @@
                 value="<?php echo isset($username)? $username : ''; ?>">
                 <i class="fas fa-asterisk"></i>
               </div>
+              <div class="error-username alert alert-warning alert-dismissible fade show mb-3" role="alert">
+                Username must be more than <strong>2</strong> characters long
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+
               <div class="form-group field-wrapper">
                 <label for="email" class="form-label">Email</label>
                 <i class="fas fa-envelope"></i>
                 <input type="email" class="form-control" id="email" name="email" placeholder="Type your email" value="<?php echo isset($email)? $email : ''; ?>">
                 <i class="fas fa-asterisk"></i>
+              </div>
+              <div class="error-email alert alert-warning alert-dismissible fade show mb-3" role="alert">
+                <?php
+                echo 'Email field can\'t be empty';
+                ?>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
               </div>
               <div class="form-group field-wrapper">
                 <label for="cellphone" class="form-label">Cell phone</label>
@@ -105,12 +80,26 @@
                 <input type="text" class="form-control" id="cellphone" name="cellphone" placeholder="Type your cell phone"
                 value="<?php echo isset($cellphone)? $cellphone : ''; ?>">
               </div>
+              <div class="error-cellphone alert alert-warning alert-dismissible fade show mb-3" role="alert">
+                Cell Phone must be more than <strong>11</strong> characters long
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+
               <div class="form-group field-wrapper message-wrapper">
                 <label for="message" class="form-label">Message</label>
                 <i class="fas fa-envelope-open-text"></i>
                 <textarea class="form-control" id="message" rows="5" name="message" placeholder="Type your message"><?php echo isset($message)? $message : ''; ?></textarea>
                 <i class="fas fa-asterisk"></i>
               </div>
+              <div class="error-message alert alert-warning alert-dismissible fade show mb-3" role="alert">
+                Message must be more than <strong>10</strong> characters long
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+
               <div class="text-center field-wrapper">
                 <button type="submit" class="btn btn-success">
                   <i class="fas fa-paper-plane"></i>  
