@@ -4,7 +4,8 @@ var gulp         = require('gulp'),
     notify       = require('gulp-notify'),
     autoprefixer = require('gulp-autoprefixer'),
     minCss       = require('gulp-minify-css'),
-    rename       = require('gulp-rename');
+    rename       = require('gulp-rename'),
+    livereload   = require('gulp-livereload');
 
 var config = {
     src: './css/styles.sass',
@@ -37,15 +38,21 @@ gulp.task('styles', function () {
       // output the minified version
       .pipe(minCss({processImport: false}))
       .pipe(rename({ extname: '.min.css' }))
-      .pipe(gulp.dest(config.dest));
+      .pipe(gulp.dest(config.dest))
+      .pipe(livereload());
 
   return stream
-      .pipe(gulp.dest('config.dest'))
       .pipe( notify( { message: 'TASK: "styles" Completed! 💯', onLast: true } ) );
 });
 
 // Task: `watch`
 gulp.task('watch', function() {
+    livereload.listen();
+
+    gulp.watch('./*.php').on('change', function(file) {
+        livereload.reload(file);
+    });
+
     gulp.watch('./css/*.sass', gulp.series('styles'));
 });
 
