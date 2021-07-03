@@ -44,6 +44,24 @@
     <!-- Custom Styles -->
     <link rel="stylesheet" href="css/styles.min.css" />
 
+    <!-- Recaptcha API -->
+    <script type="text/javascript">
+      var onloadCallback = function() {
+        grecaptcha.render('g-recaptcha', {
+          'sitekey' : '6LdqaXEbAAAAAB1j7l_wUKz_aJwFuXzclGy7FIco'
+        });
+      };
+
+      function validateRecaptcha() {
+          var response = grecaptcha.getResponse();
+          if (response.length === 0) {
+              return false;
+          } else {
+              return true;
+          }
+      }
+    </script>
+
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -60,7 +78,8 @@
           <form class="col-12 form-horizontal mb-5"
                 id="form-contact"
                 method="post"
-                action="<?php $_SERVER['PHP_SELF'] ?>">
+                action="<?php $_SERVER['PHP_SELF'] ?>"
+                onsubmit="return validateRecaptcha();">
 
                 <?php echo (isset($success))? $success : '' ?>
 
@@ -116,6 +135,8 @@
               </button>
             </div>
 
+            <div id="g-recaptcha" class="mb-3"></div>
+
             <div class="text-center field-wrapper">
               <button type="submit" class="btn btn-success">
                 <i class="fas fa-paper-plane"></i>  
@@ -123,6 +144,7 @@
               </button>
             </div>
           </form>
+          <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
         </div>
       </div>
     </section>

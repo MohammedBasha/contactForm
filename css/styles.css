@@ -40,6 +40,9 @@
 .form-contact-wrapper form textarea {
   resize: none;
 }
+.form-contact-wrapper form #g-recaptcha > * {
+  margin: auto;
+}
 .form-contact-wrapper form button[type=submit] {
   position: relative;
   padding-left: 35px;
